@@ -1,0 +1,339 @@
+CREATE TABLE [dbo].[ColorMaster](
+	[ColorId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](10) NOT NULL,
+	[Code] [varchar](20) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_ColorMaster] PRIMARY KEY CLUSTERED 
+(
+	[ColorId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+select * from ColorMaster
+
+drop table TagMaster
+CREATE TABLE [dbo].[TagMaster](
+	[TagId] [int] IDENTITY(1,1) NOT NULL,
+	[TagName] [varchar](50) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_TagMaster] PRIMARY KEY CLUSTERED 
+(
+	[TagId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+select * from SizeMaster
+drop table SizeMaster
+CREATE TABLE [dbo].[SizeMaster](
+	[SizeId] [int] IDENTITY(1,1) NOT NULL,
+	[Size] [varchar](50) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_SizeMaster] PRIMARY KEY CLUSTERED 
+(
+	[SizeId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+select * from UserTypeMaster
+drop table UserTypeMaster
+CREATE TABLE [dbo].[UserType](
+	[UserTypeId] [int] IDENTITY(1,1) NOT NULL,
+	[UserType] [varchar](50) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_UserType] PRIMARY KEY CLUSTERED 
+(
+	[UserTypeId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[UserMaster](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[UserTypeId] [int] NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_UserMaster] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[ProductMaster](
+	[ProductId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Title] [varchar](50) NULL,
+	[Code] [varchar](20) NULL,
+	[Price] [decimal](18, 2) NULL,
+	[SalePrice] [decimal](18, 2) NULL,
+	[ShortDetails] [varchar](250) NULL,
+	[Description] [varchar](500) NULL,
+	[Quantity] [int] NULL,
+	[Discount] [int] NULL,
+	[IsNew] [int] NOT NULL,
+	[IsSale] [int] NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[ColorId] [int] NOT NULL,
+	[SizeId] [int] NOT NULL,
+	[TagId] [int] NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_ProductMaster] PRIMARY KEY CLUSTERED 
+(
+	[ProductId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[ProductPictureMapping](
+	[ProductPictureMappingId] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[PictureName] [varchar](50) NOT NULL,
+	[PicturePath] [varchar](100) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_ProductPictureMapping] PRIMARY KEY CLUSTERED 
+(
+	[ProductPictureMappingId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[PurchaseItemMaster](
+	[PurchaseId] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NULL,
+	[Color] [varchar](50) NULL,
+	[Size] [varchar](50) NULL,
+	[Price] [decimal](18, 2) NULL,
+	[Discount] [int] NULL,
+	[Quantity] [int] NULL,
+	[Amount] [decimal](18, 2) NULL,
+	[IsActive] [int] NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+ CONSTRAINT [PK_PurchaseItemMaster] PRIMARY KEY CLUSTERED 
+(
+	[PurchaseId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[BillingDetails](
+	[BillingDetailId] [int] IDENTITY(1,1) NOT NULL,
+	[CustomerId] [int] NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NULL,
+	[Phone] [varchar](13) NULL,
+	[EmailId] [varchar](50) NULL,
+	[CountryId] [int] NULL,
+	[Address] [varchar](500) NULL,
+	[City] [varchar](50) NULL,
+	[State] [varchar](50) NULL,
+	[PostalCode] [varchar](10) NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_BillingDetails] PRIMARY KEY CLUSTERED 
+(
+	[BillingDetailId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[BillMaster](
+	[BillMasterId] [int] IDENTITY(1,1) NOT NULL,
+	[PurchaseId] [int] NOT NULL,
+	[BillingDetailsId] [int] NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+ CONSTRAINT [PK_BillMaster] PRIMARY KEY CLUSTERED 
+(
+	[BillMasterId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[BrandLogoMaster](
+	[BrandLogoId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Image] [varchar](100) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_BrandLogoMaster] PRIMARY KEY CLUSTERED 
+(
+	[BrandLogoId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[BrandLogoMaster](
+	[BrandLogoId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Image] [varchar](100) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_BrandLogoMaster] PRIMARY KEY CLUSTERED 
+(
+	[BrandLogoId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[CategoryMaster](
+	[CategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Title] [varchar](50) NOT NULL,
+	[Image] [varchar](50) NOT NULL,
+	[IsSave] [int] NOT NULL,
+	[link] [varchar](150) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_CategoryMaster] PRIMARY KEY CLUSTERED 
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[ContactUs](
+	[ContactId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NULL,
+	[PhoneNumber] [varchar](13) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[Message] [varchar](500) NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [date] NOT NULL,
+ CONSTRAINT [PK_ContactUs] PRIMARY KEY CLUSTERED 
+(
+	[ContactId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[CustomerMaster](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NULL,
+	[EmailId] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+ CONSTRAINT [PK_CustomerMaster] PRIMARY KEY CLUSTERED 
+(
+	[CustomerId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[OnlinePaymentMaster](
+	[OnlinePaymentId] [bigint] IDENTITY(1,1) NOT NULL,
+	[PaymentId] [bigint] NULL,
+	[tokenId] [varchar](250) NULL,
+	[transactionId] [varchar](250) NULL,
+	[country] [varchar](50) NULL,
+	[brand] [varchar](50) NULL,
+	[exp_month] [bigint] NULL,
+	[exp_year] [bigint] NULL,
+	[cvc_check] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[status] [varchar](50) NULL,
+	[description] [varchar](1000) NULL,
+	[amount] [decimal](18, 2) NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+	[ModifiedOn] [datetime] NOT NULL,
+	[ModifiedBy] [int] NULL,
+ CONSTRAINT [PK_OnlinePaymentMaster] PRIMARY KEY CLUSTERED 
+(
+	[OnlinePaymentId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[OrderStatusMaster](
+	[Id] [int] NULL,
+	[OrderStatus] [varchar](50) NULL,
+	[IsActive] [int] NULL
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[PaymentMaster](
+	[PaymentId] [int] IDENTITY(1,1) NOT NULL,
+	[BillDetailId] [int] NOT NULL,
+	[SubTotalAmount] [decimal](18, 2) NULL,
+	[ShippingAmount] [decimal](18, 2) NULL,
+	[TotalAmount] [decimal](18, 2) NULL,
+	[PaymentTypeId] [int] NULL,
+	[PaymentDate] [datetime] NULL,
+	[PaymentStatus] [int] NULL,
+	[OrderId] [varchar](500) NULL,
+	[OrderStatusId] [int] NULL,
+	[InvoiceNo] [varchar](50) NULL,
+	[IsActive] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[CreatedBy] [int] NULL,
+ CONSTRAINT [PK_PaymentMaster] PRIMARY KEY CLUSTERED 
+(
+	[PaymentId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[PaymentStatusMaster](
+	[Id] [int] NULL,
+	[Status] [varchar](50) NULL,
+	[IsActive] [int] NULL
+) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[PaymentTypeMaster](
+	[Id] [int] NULL,
+	[PaymentType] [varchar](50) NULL,
+	[IsActive] [int] NULL
+) ON [PRIMARY]
